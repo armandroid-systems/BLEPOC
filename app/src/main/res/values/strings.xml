@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BLEPOC</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="noble_string">The device not support BLE features.</string>
+</resources>

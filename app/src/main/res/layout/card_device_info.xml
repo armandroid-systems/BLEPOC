@@ -8,6 +8,10 @@
         card_view:cardElevation="15dp"
         card_view:contentPadding="15dp"
         card_view:cardCornerRadius="4dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/cardDevice">
 
         <LinearLayout

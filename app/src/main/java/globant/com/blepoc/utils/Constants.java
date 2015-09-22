@@ -12,6 +12,8 @@ public class Constants {
     public static final String KEY_PARAMS = "fragment_params";
 
     //FLAGS
-
     public static final int REQUEST_ENABLE_BT = 1;
+
+    //TIME IN MILISECONDS FOR SCAN
+    public static final int SCAN_PERIOD = 5000;
 }

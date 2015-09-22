@@ -1,6 +1,8 @@
 package globant.com.blepoc.adapters;
 
 import android.bluetooth.BluetoothDevice;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +12,9 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import globant.com.blepoc.R;
+import globant.com.blepoc.fragments.FragmentLEControl;
 import globant.com.blepoc.utils.CardViewHolder;
+import globant.com.blepoc.utils.Navigator;
 
 /**
  * Created by zadtanikus on 21/09/15.
@@ -19,9 +23,16 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CardViewHolder> 
     private final static String TAG = CustomRecyclerAdapter.class.getSimpleName();
 
     private ArrayList<BluetoothDevice> leDataSet;
+    private FragmentActivity navigatorParam;
 
-    public CustomRecyclerAdapter(ArrayList<BluetoothDevice> leDataSet) {
+    public CustomRecyclerAdapter(ArrayList<BluetoothDevice> leDataSet, FragmentActivity mActivity) {
         this.leDataSet = leDataSet;
+        this.navigatorParam = mActivity;
+    }
+
+    public CustomRecyclerAdapter(FragmentActivity mActivity) {
+        this.leDataSet = new ArrayList<>();
+        this.navigatorParam = mActivity;
     }
 
     @Override
@@ -31,9 +42,21 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CardViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(CardViewHolder cardViewHolder, int position) {
+    public void onBindViewHolder(CardViewHolder cardViewHolder, final int position) {
         cardViewHolder.mTextName.setText(leDataSet.get(position).getName());
-        Log.d(TAG, "THIS IS THE FUCKING ADRESS ["+leDataSet.get(position).toString()+"]");
+        cardViewHolder.mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Navigator.screenChange(navigatorParam, FragmentLEControl.class, leDataSet.get(position));
+                } catch (IllegalAccessException e) {
+                    Log.e(TAG,"ERROR NAVIGATION ["+e+"]");
+                } catch (InstantiationException e) {
+                    Log.e(TAG,"ERROR NAVIGATION ["+e+"]");
+                }
+            }
+        });
+        Log.d(TAG, "THIS IS THE FUCKING ADRESS ["+leDataSet.get(position).getAddress()+"]");
     }
 
     @Override
@@ -50,8 +73,10 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CardViewHolder> 
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-    private void addDevice(BluetoothDevice leDevice){
-        leDataSet.add(leDevice);
-        notifyItemInserted(leDataSet.size()-1);
+    public void addDevice(BluetoothDevice leDevice){
+        if(!leDataSet.contains(leDevice)){
+            leDataSet.add(leDevice);
+            notifyItemInserted(leDataSet.size()-1);
+        }
     }
 }

@@ -13,15 +13,13 @@ import globant.com.blepoc.R;
  */
 public class Navigator {
 
-    private static Bundle paramWrapper;
-
     public static void screenChange(FragmentActivity origin, Class fragment, Object param) throws IllegalAccessException, InstantiationException {
 
         FragmentTransaction transaction = origin.getSupportFragmentManager().beginTransaction();
         transaction.addToBackStack(Constants.START_VIEW);
         Fragment mFragment = (Fragment)fragment.newInstance();
         if(param != null){
-            paramWrapper = new Bundle();
+            Bundle paramWrapper = new Bundle();
             paramWrapper.putParcelable(Constants.KEY_PARAMS, (Parcelable)param);
             mFragment.setArguments(paramWrapper);
         }

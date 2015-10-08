@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import globant.com.blepoc.R;
 import globant.com.blepoc.fragments.FragmentLEControl;
 import globant.com.blepoc.utils.CardViewHolder;
+import globant.com.blepoc.utils.Constants;
 import globant.com.blepoc.utils.Navigator;
 
 /**
@@ -48,7 +49,7 @@ public class CustomRecyclerAdapter extends RecyclerView.Adapter<CardViewHolder> 
             @Override
             public void onClick(View v) {
                 try {
-                    Navigator.screenChange(navigatorParam, FragmentLEControl.class, leDataSet.get(position));
+                    Navigator.screenChange(navigatorParam, FragmentLEControl.class, leDataSet.get(position), Constants.CONTROL_VIEW);
                 } catch (IllegalAccessException e) {
                     Log.e(TAG,"ERROR NAVIGATION ["+e+"]");
                 } catch (InstantiationException e) {

@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -42,7 +43,7 @@ public class FragmentScan extends Fragment {
     private RecyclerView mRecyccler;
     private ScanCallback mScanCallBack;
     private BluetoothAdapter.LeScanCallback leScanCallback;
-    private CustomRecyclerAdapter mAdapter = new CustomRecyclerAdapter(getActivity());
+    private CustomRecyclerAdapter mAdapter;
 
     @Nullable
     @Override
@@ -54,6 +55,7 @@ public class FragmentScan extends Fragment {
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         mRecyccler.setLayoutManager(llm);
 
+        mAdapter = new CustomRecyclerAdapter(getActivity());
 
         mRecyccler.setAdapter(mAdapter);
 

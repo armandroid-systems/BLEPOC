@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import globant.com.blepoc.fragments.FragmentScan;
+import globant.com.blepoc.utils.Constants;
 import globant.com.blepoc.utils.Navigator;
 
 public class FirstActivity extends AppCompatActivity {
@@ -20,7 +21,7 @@ public class FirstActivity extends AppCompatActivity {
         if(findViewById(R.id.FragmentWrapper) != null){
             if(savedInstanceState == null){
                 try {
-                    Navigator.screenChange(FirstActivity.this,FragmentScan.class,null);
+                    Navigator.screenChange(FirstActivity.this,FragmentScan.class,null, Constants.START_VIEW);
                 } catch (IllegalAccessException e) {
                     Log.e(TAG,"NAVIGATION ACCES FRAGMENT ERROR ["+e+"]");
                 } catch (InstantiationException e) {
